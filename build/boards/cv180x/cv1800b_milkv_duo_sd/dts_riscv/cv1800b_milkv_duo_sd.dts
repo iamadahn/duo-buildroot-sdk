@@ -11,8 +11,21 @@
 &spi2 {
 	status = "okay";
 
-	spidev@0 {
+	/delete-node/ spidev@0;
+	ili9486: ili9486@0{
+		compatible = "ilitek,ili9486";
+		reg = <0>;
 		status = "okay";
+		spi-max-frequency = <48000000>;
+		rotate = <90>;
+		fps = <60>;
+		buswidth = <8>;
+		bpp = <16>;
+		write-only;
+
+		dc-gpios = <&porta 15 0>;
+		reset-gpios = <&porta 14 1>;
+
 	};
 };
 
