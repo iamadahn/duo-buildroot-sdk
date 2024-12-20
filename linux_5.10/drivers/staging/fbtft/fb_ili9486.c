@@ -131,6 +131,7 @@ static int write_vmem16_18bus8(struct fbtft_par *par, size_t offset, size_t len)
 						to_copy, remain - to_copy);
 
 		for (i = 0; i < to_copy; i++) {
+			/*
 			u16 pixel = vmem16[i];
 			u16 r = pixel & 0x1f;
 			u16 g = (pixel & (0x3f << 5)) >> 5;
@@ -143,6 +144,11 @@ static int write_vmem16_18bus8(struct fbtft_par *par, size_t offset, size_t len)
 			txbuf[i * 3 + 0] = r8;
 			txbuf[i * 3 + 1] = g8;
 			txbuf[i * 3 + 2] = b8;
+			*/
+
+			txbuf[i * 3 + 0] = ((vmem16[i] & 0x1F) & 0x1F) << 3;
+			txbuf[i * 3 + 1] = (((vmem16[i] & (0x3F << 5)) >> 5) & 0x3F) << 2;
+			txbuf[i * 3 + 2] = (((vmem16[i] & (0x1F << 11)) >> 11) & 0x1F) << 3;
 		}
 
 		vmem16 = vmem16 + to_copy;
