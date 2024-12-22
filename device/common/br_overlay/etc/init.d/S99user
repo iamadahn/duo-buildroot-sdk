@@ -28,7 +28,7 @@ case "$1" in
         fi
 
         if [ -f $SYSTEMPATH/slip-init.sh ]; then
-                . $SYSTEMPATH/usb.sh &
+                . $SYSTEMPATH/slip-init.sh &
         fi
 
         if [ -f $USERDATAPATH/auto.sh ]; then
