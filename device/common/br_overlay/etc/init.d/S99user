@@ -23,7 +23,11 @@ case "$1" in
                 . $SYSTEMPATH/blink.sh &
         fi
 
-	if [ -f $SYSTEMPATH/usb.sh ]; then
+	    if [ -f $SYSTEMPATH/usb.sh ]; then
+                . $SYSTEMPATH/usb.sh &
+        fi
+
+        if [ -f $SYSTEMPATH/slip-init.sh ]; then
                 . $SYSTEMPATH/usb.sh &
         fi
 
@@ -32,7 +36,8 @@ case "$1" in
                 . $USERDATAPATH/auto.sh &
 		exit 1
         fi
-	if [ -f $SYSTEMPATH/auto.sh ]; then
+
+	    if [ -f $SYSTEMPATH/auto.sh ]; then
                 usleep 30000
                 . $SYSTEMPATH/auto.sh &
         fi
